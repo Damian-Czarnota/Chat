@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size:0;
+  background-color: black;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.loading{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading__grid {
+  width: 300px;
+  height: 300px;
+}
+
+.loading__grid .loading__cube {
+  width: 33%;
+  height: 33%;
+  background-color: #fff;
+  float: left;
+  animation: loading__cubeGridScaleDelay 1.3s infinite ease-in-out;
+}
+
+.loading__grid .loading__cube--1 {
+  animation-delay: 0.2s;
+}
+
+.loading__grid .loading__cube--2 {
+  animation-delay: 0.3s;
+}
+
+.loading__grid .loading__cube--3 {
+  animation-delay: 0.4s;
+}
+
+.loading__grid .loading__cube--4 {
+  animation-delay: 0.1s;
+}
+
+.loading__grid .loading__cube--5 {
+  animation-delay: 0.2s;
+}
+
+.loading__grid .loading__cube--6 {
+  animation-delay: 0.3s;
+}
+
+.loading__grid .loading__cube--7 {
+  animation-delay: 0s;
+}
+
+.loading__grid .loading__cube--8 {
+  animation-delay: 0.1s;
+}
+
+.loading__grid .loading__cube--9 {
+  animation-delay: 0.2s;
+}
+
+@keyframes loading__cubeGridScaleDelay {
+  0%,
+  70%,
+  100% {
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
+}
+
+[hidden] { display: none !important; }
