@@ -1,0 +1,40 @@
+@import "../../variables";
+
+.navigation{
+  width:100vw;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(255,255,255,0.4);
+  &__logo{
+
+  }
+  &__list{
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__item{
+    position: relative;
+    text-decoration: none;
+    font-size:1rem;
+    color: $fourth-gray;
+    padding: 0 12px;
+    font-weight: 300;
+  }
+  &__item:after {
+    bottom: -5px;
+    content: "";
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #da1c5b;
+    transition: width .3s ease 0s,left .3s ease 0s;
+    width: 0;
+  }
+
+  &__item:hover:before, &__item:hover:after{
+    width: 100%;
+    left: 0;
+  }
+}

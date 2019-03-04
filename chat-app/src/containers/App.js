@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.scss';
-
+import Navigation from '../components/navigation/navigation';
 
 class App extends Component {
 
@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-
+        <Navigation />
       </Fragment>
     );
   }
