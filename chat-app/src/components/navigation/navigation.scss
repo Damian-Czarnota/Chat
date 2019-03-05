@@ -1,13 +1,16 @@
 @import "../../variables";
 
 .navigation{
+  position: fixed;
   width:100vw;
-  height: 50px;
+  height: 100px;
   display: flex;
   justify-content: space-around;
-  background-color: rgba(255,255,255,0.4);
+  background-color: #fff;
+  z-index: 1000;
   &__logo{
-
+    display: flex;
+    align-items: center;
   }
   &__list{
     height: 100%;
@@ -18,9 +21,13 @@
     position: relative;
     text-decoration: none;
     font-size:1rem;
-    color: $fourth-gray;
-    padding: 0 12px;
+    color: $main-gray;
+    padding: 0 24px;
     font-weight: 300;
+    opacity: 0.9;
+    &--login{
+      color:$main-blue;
+    }
   }
   &__item:after {
     bottom: -5px;
@@ -28,7 +35,7 @@
     height: 2px;
     left: 50%;
     position: absolute;
-    background: #da1c5b;
+    background: $main-gold;
     transition: width .3s ease 0s,left .3s ease 0s;
     width: 0;
   }
@@ -37,4 +44,8 @@
     width: 100%;
     left: 0;
   }
+}
+
+.shadow{
+  box-shadow: 0 2px 4px 0 rgba(151, 145, 151, 0.1);
 }

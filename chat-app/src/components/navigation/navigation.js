@@ -3,10 +3,24 @@
  */
 
 import React, {Component} from 'react';
-import NavigationLogo from '../navigation-logo';
+import NavigationLogo from '../navigation-logo/navigation-logo';
 import './navigation.scss';
 
 export default class Navigation extends Component{
+
+    componentDidMount() {
+        window.onscroll = () => {
+            let nav = document.querySelector('.navigation');
+            if(window.pageYOffset > 0)
+                nav.classList.add('shadow');
+            else
+                nav.classList.remove('shadow');
+            };
+    }
+
+    componentWillUnmount() {
+        window.onscroll = null;
+    }
 
     render(){
         return(
@@ -17,7 +31,7 @@ export default class Navigation extends Component{
                 <div className="navigation__list">
                     <a href="#" className="navigation__item">About us</a>
                     <a href="#" className="navigation__item">Instruction</a>
-                    <a href="#" className="navigation__item">Log in</a>
+                    <a href="#" className="navigation__item navigation__item--login">Log in</a>
                 </div>
             </nav>
         )
