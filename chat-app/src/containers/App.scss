@@ -1,3 +1,16 @@
 body{
   font-family: "Roboto", sans-serif;
 }
+
+.white-space{
+  margin-top:100px;
+}
+
+.container{
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

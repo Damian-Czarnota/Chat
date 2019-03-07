@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.scss';
 import Navigation from '../components/navigation/navigation';
-
+import MainScreen from '../components/main-screen/MainScreen';
 class App extends Component {
 
   componentDidMount(){
@@ -15,6 +15,9 @@ class App extends Component {
     return (
       <Fragment>
         <Navigation />
+        <main className="white-space">
+          <MainScreen />
+        </main>
       </Fragment>
     );
   }
