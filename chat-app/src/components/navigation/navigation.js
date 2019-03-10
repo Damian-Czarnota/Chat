@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import NavigationLogo from '../navigation-logo/navigation-logo';
+import NavigationLogo from '../navigationLogo/navigationLogo';
 import './navigation.scss';
 
 export default class Navigation extends Component{

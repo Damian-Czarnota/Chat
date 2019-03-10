@@ -1,0 +1,24 @@
+@import "../../variables";
+
+.enjoy {
+  margin-top:24px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &__add {
+    text-align: center;
+    opacity:0;
+    margin-top:5px;
+    font-size: 13px;
+    color: $third-gray;
+    border-bottom:2px dashed $main-gold;
+    width:50%;
+  }
+}
+
+.button:hover {
+  ~.enjoy__add {
+    transition: 0.5s;
+    opacity: 1;
+  }
+}

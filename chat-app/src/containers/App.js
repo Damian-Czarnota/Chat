@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.scss';
 import Navigation from '../components/navigation/navigation';
-import MainScreen from '../components/main-screen/MainScreen';
+import MainScreen from '../components/mainScreen/MainScreen';
 class App extends Component {
 
   componentDidMount(){

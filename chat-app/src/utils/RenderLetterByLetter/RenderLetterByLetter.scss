@@ -1,8 +1,11 @@
-h1{
-  font-size:20px;
-}
+@import "../../variables";
+
 span{
-  font-size:14px;
+  font-size:inherit;
+}
+
+.text-rotator{
+  color: $main-gold;
 }
 
 .blink {
