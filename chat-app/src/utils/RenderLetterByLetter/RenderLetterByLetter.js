@@ -18,7 +18,8 @@ export default class RenderLetterByLetter extends Component {
         const {elements, interval} = this.props;
         this.state = {
             elements: elements,
-            interval:interval
+            interval:interval,
+            text:''
         }
     }
 
@@ -28,34 +29,33 @@ export default class RenderLetterByLetter extends Component {
 
     renderTexts = (index) =>{
         let { elements, interval } = this.state;
-        let textInput = document.querySelector('.text-rotator');
 
         if(index===this.state.elements.length)
             index=0;
 
-        this.addLetter(textInput, elements[index], interval, index);
+        this.addLetter(elements[index], interval, index);
 
     };
 
-    addLetter = (destination, message, speed,index) =>{
+    addLetter = (message, speed,index) =>{
         let i = 0;
         let interval = setInterval(() => {
-            destination.innerText += message.charAt(i);
+            this.setState({text:this.state.text+= message.charAt(i)});
             i++;
             if (i > message.length){
                 clearInterval(interval);
-                this.removeLetter(destination, message, speed,index);
+                this.removeLetter(message, speed,index);
             }
         }, speed);
     };
 
-    removeLetter = (destination,message,speed,index) =>{
+    removeLetter = (message,speed,index) =>{
         let i = message.length;
         let interval = setInterval(() =>{
-            destination.innerText = message.substr(0,i);
+            this.setState({text:message.substr(0,i)});
             i--;
             if(i<0){
-                destination.innerText='';
+                this.setState({text:''});
                 clearInterval(interval);
                 this.renderTexts(index+1)
             }
@@ -63,9 +63,12 @@ export default class RenderLetterByLetter extends Component {
     };
 
     render() {
+        let { text } = this.state;
         return(
             <Fragment>
-                <span className="text-rotator"> </span><span className="blink">|</span>
+                {(<span className="text-rotator">
+                    {text}</span>)}
+                    <span className="blink">|</span>
             </Fragment>
         )
     }
