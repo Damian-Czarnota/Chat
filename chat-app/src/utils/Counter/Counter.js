@@ -15,27 +15,42 @@ export default class Counter extends Component {
         this.state = {
             endingNumber: endingNumber,
             number: 0,
-            interval: interval | 90
+            interval: interval | 70
         };
         this.count = this.count.bind(this);
+        this.increase = this.increase.bind(this);
     }
 
     componentDidMount() {
-        this.count();
+        this.count(this.increase);
     }
 
-    count = () => {
+    count = (callback) => {
         let { endingNumber, number, interval } = this.state;
-        setInterval(() =>{
-            if(endingNumber >= number)
-                this.setState({number:number++});
-        },interval)
+        let internalCallback = function(number, interval) {
+            return function() {
+                if (endingNumber >= ++number) {
+                    if(number>endingNumber*0.8)
+                        interval*=1.2;
+                    setTimeout(internalCallback, interval);
+                    callback();
+                }
+            }
+        }(number,interval);
+        setTimeout(internalCallback,interval);
+    };
+
+    increase = () =>{
+        let { endingNumber, number } = this.state;
+        if(endingNumber >= number){
+            this.setState({number:number+1});
+        }
     };
 
     render() {
         let { number } = this.state;
         return(
-            <span>{number}</span>
+            <span className="counter">{number}</span>
         )
     }
 }
