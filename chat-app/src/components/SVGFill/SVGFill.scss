@@ -1,0 +1,47 @@
+@import "../../components/startUsingButton/StartUsingButton";
+
+.svg {
+  display: none;
+  position: absolute;
+  top:100%;
+  &__text {
+    font-size: 40px;
+    font-family: Arial, sans-serif;
+    &--stroke {
+      fill: none;
+      stroke: $second-gold;
+      stroke-width: 5px;
+      stroke-dashoffset: -100;
+      stroke-dasharray: 100;
+      animation: dash 0.5s ease-out forwards;
+      &:nth-child(2) {
+        animation-delay: .1s;
+      }
+      &:nth-child(3) {
+        animation-delay: .2s;
+      }
+      &:nth-child(5) {
+        animation-delay: 0.3s;
+      }
+      :nth-child(6) {
+        animation-delay: 0.4s;
+      }
+      &2 {
+        stroke: $main-gold;
+        animation-delay: 0.3s;
+      }
+    }
+  }
+}
+
+.button:hover {
+  ~.svg {
+      display: block;
+    }
+}
+
+@keyframes dash {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
