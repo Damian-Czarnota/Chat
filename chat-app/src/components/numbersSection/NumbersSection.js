@@ -6,10 +6,10 @@ export default class NumbersSection extends Component {
     constructor(props){
         super(props);
         this.state = {
-            config:[{title:'Registered users',endingNumber:140, interval:90},
-                {title:'Written messages',endingNumber:500, interval:50},
-                {title:'Active users',endingNumber:5, interval:150},
-                {title:'Project\'s collaborators',endingNumber:1, interval:600}
+            config:[{title:'Registered users',endingNumber:140, interval:90, icon:'fas fa-user-check'},
+                {title:'Written messages',endingNumber:500, interval:50, icon:'far fa-envelope-open'},
+                {title:'Active users',endingNumber:5, interval:150, icon:'fas fa-users'},
+                {title:'Project\'s collaborators',endingNumber:1, interval:600, icon:'fas fa-bug'}
             ]
         }
     }
@@ -17,18 +17,23 @@ export default class NumbersSection extends Component {
     render() {
         let { config } = this.state;
         return(
-            <div className="numbersSection">
-                <div className="numbersSection__numbers">
-                    {config&&(config.map(item =>(
-                            <div className="box" key={item.title}>
-                                <div className="box__wrapper">
-                                    <span class="far fa-envelope-open box__icon"></span>
-                                    <Counter endingNumber={item.endingNumber} interval={item.interval} />
-                                    <p className="box__subtitle">{item.title}</p>
-                                </div>
-                            </div>
-                        ))
-                    )}
+            <div className="section section--numbersSection">
+                <div className="wrapper">
+                    <div className="section__description">
+                        <h2 className="section__title section__title--opacity">Our service in numbers</h2>
+                    </div>
+                    <div className="section__numbers">
+                            {config&&(config.map(item =>(
+                                    <div className="box" key={item.title}>
+                                        <div className="box__wrapper">
+                                            <span className={`${item.icon} box__icon`}></span>
+                                            <Counter endingNumber={item.endingNumber} interval={item.interval} />
+                                            <p className="box__subtitle">{item.title}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                    </div>
                 </div>
             </div>
         )

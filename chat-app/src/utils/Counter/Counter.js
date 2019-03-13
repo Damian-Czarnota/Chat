@@ -50,7 +50,7 @@ export default class Counter extends Component {
     render() {
         let { number } = this.state;
         return(
-            <span className="counter">{number}</span>
+            <span className="number">{number}</span>
         )
     }
 }
