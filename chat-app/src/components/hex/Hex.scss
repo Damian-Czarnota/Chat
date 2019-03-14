@@ -1,0 +1,27 @@
+@import "../../variables";
+.section {
+  &--technologies {
+    svg {
+      width: 100%;
+      display: block;
+    }
+
+    use {
+      fill: transparent;
+    }
+
+    use:hover {
+      cursor: pointer;
+      fill: $main-gold;
+    }
+  }
+}
+
+svg {
+  display: block;
+}
+
+use {
+  fill: transparent;
+}
+
