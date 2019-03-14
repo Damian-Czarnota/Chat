@@ -20,11 +20,11 @@ export default class NumbersSection extends Component {
             <div className="section section--numbersSection">
                 <div className="wrapper">
                     <div className="section__description">
-                        <h2 className="section__title section__title--opacity">Our service in numbers</h2>
+                        <h2 className="section__title section__title--opacity section__title--blue">Our service in numbers</h2>
                     </div>
-                    <div className="section__numbers">
+                    <div className="section__boxes">
                             {config&&(config.map(item =>(
-                                    <div className="box" key={item.title}>
+                                    <div className="box box--4" key={item.title}>
                                         <div className="box__wrapper">
                                             <span className={`${item.icon} box__icon`}></span>
                                             <Counter endingNumber={item.endingNumber} interval={item.interval} />

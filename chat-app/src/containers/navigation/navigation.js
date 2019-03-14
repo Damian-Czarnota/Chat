@@ -3,7 +3,7 @@
  */
 
 import React, {Component, Fragment} from 'react';
-import NavigationLogo from '../navigationLogo/navigationLogo';
+import NavigationLogo from '../../components/navigationLogo/navigationLogo';
 import './navigation.scss';
 
 

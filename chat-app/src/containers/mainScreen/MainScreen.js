@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import './MainScreen.scss';
 import RenderLetterByLetter from '../../utils/RenderLetterByLetter/RenderLetterByLetter';
-import StartUsingButton from '../startUsingButton/StartUsingButton';
+import StartUsingButton from '../../components/startUsingButton/StartUsingButton';
 
 export default class MainScreen extends Component {
 
