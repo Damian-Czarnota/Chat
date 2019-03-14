@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './App.scss';
-import Navigation from '../components/navigation/navigation';
-import MainScreen from '../components/mainScreen/MainScreen';
-import NumbersSection from '../components/numbersSection/NumbersSection';
+import Navigation from './navigation/navigation';
+import MainScreen from './mainScreen/MainScreen';
+import NumbersSection from './numbersSection/NumbersSection';
+import DetailsSection from './detailsSection/DetailsSection';
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
         <main className="white-space">
           <MainScreen />
           <NumbersSection />
+          <DetailsSection />
         </main>
       </Fragment>
     );
