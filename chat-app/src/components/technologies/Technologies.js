@@ -5,12 +5,13 @@
 
 import React, { Component, Fragment } from 'react';
 import HexSeparator from '../hex/HexSeparator';
+import './technologies.scss'
 
 export default class  Technologies extends Component {
     render(){
         let config  = [
-            {url:'/img/react.png'},
-            {url:'/img/spring.png'}
+            {url:'/img/react.png', title: 'React'},
+            {url:'/img/spring.png', title: 'Spring'}
         ];
         return(
             <Fragment>
@@ -24,7 +25,12 @@ export default class  Technologies extends Component {
                             {config&&(config.map((item,key) =>(
                                     <div className="box box--2" key={key}>
                                         <div className="box__wrapper">
-                                            <img src={item.url} className="img--circle" />
+                                            <figure class="box__image">
+                                                <img src={item.url} alt={item.url}/>
+                                                <figcaption>
+                                                    <span>{item.title}</span>
+                                                </figcaption>
+                                            </figure>
                                         </div>
                                     </div>
                                 ))

@@ -20,7 +20,7 @@ export default class MainScreen extends Component {
                         interval={300}/>
                     </h1>
                     <h2>Just log in and start chatting with anyone!</h2>
-                    <StartUsingButton />
+                    <StartUsingButton text="Enjoy!"/>
                 </div>
             </div>
         )

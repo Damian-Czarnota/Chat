@@ -28,7 +28,7 @@ export default class HexBackground extends Component {
                 </g>`;
 
         return(
-            <div dangerouslySetInnerHTML={{ __html: SVG }} />
+            <div className="fly" dangerouslySetInnerHTML={{ __html: SVG }} />
         )
     }
 }

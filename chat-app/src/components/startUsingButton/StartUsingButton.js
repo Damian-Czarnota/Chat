@@ -5,14 +5,25 @@
 import React, { Component } from 'react';
 import './StartUsingButton.scss';
 import SVGFill from '../SVGFill/SVGFill';
+import PropTypes from 'prop-types';
 
 export default class StartUsingButton extends Component {
 
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+        withoutDescription: PropTypes.bool
+    };
+
+    constructor(props){
+        super(props);
+    }
     render(){
+        let { text, withoutDescription } = this.props;
         return(
             <div className="enjoy">
-                <button className="button button--big button--primary">Enjoy!</button>
-                <SVGFill />
+                <button className="button button--big button--primary">{text}</button>
+                {!withoutDescription&&(
+                    <SVGFill />)}
             </div>
         )
     }

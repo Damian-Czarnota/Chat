@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import HexBackground from '../hex/HexBackground';
+import StartUsingButton from '../../components/startUsingButton/StartUsingButton';
 
 export default class Register extends Component {
     render(){
@@ -26,9 +27,9 @@ export default class Register extends Component {
                                     <HexBackground />
                                 </div>
                             </div>
-                            <div className="box box--2">
+                            <div className="box box--2 box--background">
                                 <div className="box__wrapper">
-
+                                    <StartUsingButton text="Register now!" withoutDescription="true" />
                                 </div>
                             </div>
                         </div>
