@@ -25,7 +25,7 @@ export default class  Technologies extends Component {
                             {config&&(config.map((item,key) =>(
                                     <div className="box box--2" key={key}>
                                         <div className="box__wrapper">
-                                            <figure class="box__image">
+                                            <figure className="box__image">
                                                 <img src={item.url} alt={item.url}/>
                                                 <figcaption>
                                                     <span>{item.title}</span>

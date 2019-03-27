@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 export default class WhyUs extends Component {
     render(){
         return(
-            <div className="section">
+            <div className="section" id="why_us">
                 <div className="wrapper">
                     <div className="section__description">
                         <h2 className="section__title">Why us?</h2>

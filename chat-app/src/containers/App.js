@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import './App.scss';
 import Navigation from './navigation/navigation';
 import MainScreen from './mainScreen/MainScreen';
-import NumbersSection from './numbersSection/NumbersSection';
+import NumbersSection from '../components/numbersSection/NumbersSection';
 import DetailsSection from './detailsSection/DetailsSection';
 
 class App extends Component {

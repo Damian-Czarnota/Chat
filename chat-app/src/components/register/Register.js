@@ -29,7 +29,7 @@ export default class Register extends Component {
                             </div>
                             <div className="box box--2 box--background">
                                 <div className="box__wrapper">
-                                    <StartUsingButton text="Register now!" withoutDescription="true" />
+                                    <StartUsingButton text="Register now!" withoutDescription={true} />
                                 </div>
                             </div>
                         </div>

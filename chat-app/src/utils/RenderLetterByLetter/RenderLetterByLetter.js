@@ -40,7 +40,8 @@ export default class RenderLetterByLetter extends Component {
     addLetter = (message, speed,index) =>{
         let i = 0;
         let interval = setInterval(() => {
-            this.setState({text:this.state.text+= message.charAt(i)});
+            let { text } = this.state;
+            this.setState({text:text+= message.charAt(i)});
             i++;
             if (i > message.length){
                 clearInterval(interval);

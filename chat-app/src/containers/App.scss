@@ -101,6 +101,7 @@ p {
   }
 }
 
+
 .box{
   position: relative;
   width: 100%;
@@ -206,10 +207,16 @@ p {
     }
   }
   .wrapper {
-    max-width:350px;
+    max-width:450px;
   }
   .box:nth-child(2), .box:nth-child(3), .box:nth-child(4){
     padding-top:70px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .wrapper {
+    max-width:350px;
   }
 }
 
@@ -253,5 +260,22 @@ p {
   }
   100% {
     transform: translateX(1%);
+  }
+}
+
+@media screen and (max-width: 800px){
+  .section {
+    &__text {
+      &--center {
+        padding: 10px 0;
+      }
+    }
+  }
+  .box {
+    &__wrapper {
+      &--left {
+        padding: 0;
+      }
+    }
   }
 }

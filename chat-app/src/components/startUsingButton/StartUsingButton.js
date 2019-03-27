@@ -14,9 +14,6 @@ export default class StartUsingButton extends Component {
         withoutDescription: PropTypes.bool
     };
 
-    constructor(props){
-        super(props);
-    }
     render(){
         let { text, withoutDescription } = this.props;
         return(

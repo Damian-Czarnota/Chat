@@ -17,7 +17,7 @@ export default class NumbersSection extends Component {
     render() {
         let { config } = this.state;
         return(
-            <div className="section section--numbersSection">
+            <div className="section section--numbersSection" id="about_us">
                 <div className="wrapper">
                     <div className="section__description">
                         <h2 className="section__title section__title--opacity section__title--blue">Our service in numbers</h2>
