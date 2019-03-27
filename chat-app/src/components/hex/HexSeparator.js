@@ -11,7 +11,7 @@ export default class HexSeparator extends Component {
         const SVG = `<svg viewBox="0 0 100 100" >
                 <defs>
                     <g id="hex">
-                        <polygon stroke="#000000" stroke-width="0.5" points="5,-9 -5,-9 -10,0 -5,9 5,9 10,0" />
+                        <polygon stroke="#666666" stroke-width="0.5" points="5,-9 -5,-9 -10,0 -5,9 5,9 10,0" />
                     </g>
                 </defs>
 
