@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Counter.scss';
+import ReactDOM from 'react-dom';
 
 export default class Counter extends Component {
 
@@ -22,10 +23,17 @@ export default class Counter extends Component {
     }
 
     componentDidMount() {
-        this.count(this.increase);
+        window.addEventListener('scroll',this.startCounting);
     }
 
+    startCounting = () => {
+        let rect = ReactDOM.findDOMNode(this)
+            .getBoundingClientRect();
+        if(rect.top <= (document.documentElement.scrollTop+200))
+            this.count(this.increase)
+    };
     count = (callback) => {
+        window.removeEventListener('scroll',this.startCounting);
         let { endingNumber, number, interval } = this.state;
         let internalCallback = function(number, interval) {
             return function() {

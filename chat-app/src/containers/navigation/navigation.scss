@@ -41,7 +41,11 @@
       margin:2px 0;
       background-color: $fourth-gray;
     }
+    &--active {
+      color: $main-gold;
+    }
   }
+
   &__item:after {
     bottom: -5px;
     content: "";

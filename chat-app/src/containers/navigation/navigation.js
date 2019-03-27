@@ -5,7 +5,7 @@
 import React, {Component, Fragment} from 'react';
 import NavigationLogo from '../../components/navigationLogo/navigationLogo';
 import './navigation.scss';
-
+import { Link } from "react-scroll";
 
 export default class Navigation extends Component{
 
@@ -43,9 +43,9 @@ export default class Navigation extends Component{
                         <NavigationLogo />
                     </div>
                     <div className="navigation__list">
-                        <a href="#about_us" className="navigation__item">About us</a>
-                        <a href="#why_us" className="navigation__item">Why us?</a>
-                        <a href="/login" className="navigation__item navigation__item--login">Log in</a>
+                        <Link to="about_us" offset={-100} smooth={true} spy={true} activeClass="navigation__item--active" className="navigation__item">About us</Link>
+                        <Link to="why_us" offset={-100} smooth={true} spy={true} activeClass="navigation__item--active" className="navigation__item">Why us?</Link>
+                        <Link to="/login" className="navigation__item navigation__item--login">Log in</Link>
                     </div>
                     <div className="navigation__hamburger" onClick={this.toggleMobileMenu}>
                         <div className={showMobileMenu?'navigation__bar navigation__bar--transform':'navigation__bar'}></div>
@@ -55,9 +55,13 @@ export default class Navigation extends Component{
                 </nav>
                 <nav className={showMobileMenu?'navigation__mobile navigation__mobile--transform':'navigation__mobile'}>
                     <div className="navigation__list--mobile">
-                        <a href="#about_us" className="navigation__item navigation__item--mobile">About us</a>
-                        <a href="#why_us" className="navigation__item navigation__item--mobile">Why us?</a>
-                        <a href="/login" className="navigation__item navigation__item--login navigation__item--mobile">Log in</a>
+                        <Link to="about_us" offset={-100} smooth={true} spy={true} activeClass="navigation__item--active" className="navigation__item navigation__item--mobile">
+                            About us
+                        </Link>
+                        <Link to="why_us" offset={-100} smooth={true} spy={true} activeClass="navigation__item--active" className="navigation__item navigation__item--mobile">
+                            Why us?
+                        </Link>
+                        <Link to="/login" className="navigation__item navigation__item--login navigation__item--mobile">Log in</Link>
                     </div>
                 </nav>
             </Fragment>
