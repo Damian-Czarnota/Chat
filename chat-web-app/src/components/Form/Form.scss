@@ -1,0 +1,53 @@
+@import "../../variables";
+
+.form {
+  $f: &;
+  &__box{
+    position: relative;
+    padding: 20px 0 0 0;
+    margin: 10px 0 0 0;
+    color: $second-gray;
+  }
+  &__label {
+    position: absolute;
+    pointer-events: none;
+    top: 20px;
+    left: 10px;
+    display: block;
+    &--active {
+      position: absolute;
+      font-size: 12px;
+      top: 5px;
+      left: 0;
+      color: #2dc9ff;
+      transition: 0.5s;
+    }
+  }
+  &__input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 10px 0;
+    color: #666;
+    border-bottom: 1px solid $third-gray;
+    box-sizing: content-box;
+    &::placeholder {
+      visibility: hidden;
+    }
+
+    &:focus {
+      outline: none;
+      transition: 0.5s;
+      border-bottom: 1px solid #2dc9ff;
+    }
+  }
+  &__box:focus-within, &__input:valid ~ {
+    #{$f}__label {
+      font-size: 12px;
+      top: 5px;
+      left: 0;
+      color: #2dc9ff;
+      transition: 0.5s;
+    }
+  }
+}
