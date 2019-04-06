@@ -45,7 +45,7 @@ export default class Navigation extends Component{
                     <div className="navigation__list">
                         <Link to="about_us" offset={-100} smooth={true} spy={true} activeClass="navigation__item--active" className="navigation__item">About us</Link>
                         <Link to="why_us" offset={-100} smooth={true} spy={true} activeClass="navigation__item--active" className="navigation__item">Why us?</Link>
-                        <Link to="/login" className="navigation__item navigation__item--login">Log in</Link>
+                        <a href={process.env.REACT_APP_WEB_APP_LOGIN} className="navigation__item navigation__item--login">Log in</a>
                     </div>
                     <div className="navigation__hamburger" onClick={this.toggleMobileMenu}>
                         <div className={showMobileMenu?'navigation__bar navigation__bar--transform':'navigation__bar'}></div>

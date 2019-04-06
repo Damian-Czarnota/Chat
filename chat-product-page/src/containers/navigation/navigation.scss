@@ -57,6 +57,10 @@
     width: 0;
   }
 
+  &__item:hover {
+    cursor: pointer;
+  }
+
   &__item:hover:before, &__item:hover:after{
     width: 100%;
     left: 0;
