@@ -1,33 +1,24 @@
 import React, {Component, Fragment} from 'react';
 import Form from "../Form/Form";
-import update from "react-addons-update";
-import {prepareFormData} from "../../utils/utils";
+import { prepareFormData } from "../../utils/utils";
+import {store} from "../../Redux/store";
 
-
-export default class Register extends Component {
+class Register extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            values: [{key: 'Login', value: null, type: 'text'},
-                {key:'Password', value: null, type: 'password'},
-                {key:'E-mail', value: null, type: 'e-mail'},
-                {key:'Name', value: null, type: 'text', AC: 'infinity'}]
+            values: [{key: 'login', name: 'Login', type: 'text'},
+                {key: 'password', name:'Password', type: 'password'},
+                {key: 'e-mail', name:'E-mail', type: 'e-mail'},
+                {key: 'name', name:'Name', type: 'text'}]
         };
-        this.handleChange = this.handleChange.bind(this);
         this.register = this.register.bind(this);
     }
 
-    handleChange = (event) =>{
-        let { target } = event;
-        let { name } = target;
-        this.setState({
-            values: update(this.state.values,{[name]:{value: {$set: target.value}}})
-        });
-    };
 
     register = () => {
-        let params = prepareFormData(this.state.values);
+        let params = prepareFormData(store.getState().formReducer.values);
 
     };
 
@@ -41,3 +32,5 @@ export default class Register extends Component {
         )
     }
 }
+
+export default Register;

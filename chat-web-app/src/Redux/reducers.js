@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { AUTHENTICATE, REGISTER, SET_USER_INFO, IS_ADMIN } from './actions';
+import { AUTHENTICATE, REGISTER, SET_USER_INFO, IS_ADMIN, COMPLETE_FORM } from './actions';
 
 const userInitialState = {
     isAdmin: false,
@@ -11,6 +11,7 @@ const authenticationInitialState = {
     token: '',
     register: false
 };
+
 
 function userReducer(state = userInitialState, action) {
     switch (action.type) {
@@ -39,9 +40,20 @@ function authenticateReducer(state = authenticationInitialState, action) {
     }
 }
 
+function formReducer(state = [], action) {
+    switch (action.type) {
+        case COMPLETE_FORM:
+            return {...state,
+            values: action.payload };
+        default:
+            return state;
+    }
+}
+
 const chatRootReducer = combineReducers({
     userReducer,
-    authenticateReducer
+    authenticateReducer,
+    formReducer
 });
 
 export default chatRootReducer
