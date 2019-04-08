@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Form from "../Form/Form";
 import { prepareFormData } from "../../utils/utils";
 import {store} from "../../Redux/store";
+import * as userService from "../../services/userService";
 
 class Register extends Component {
 
@@ -10,7 +11,8 @@ class Register extends Component {
         this.state = {
             values: [{key: 'login', name: 'Login', type: 'text'},
                 {key: 'password', name:'Password', type: 'password'},
-                {key: 'e-mail', name:'E-mail', type: 'e-mail'},
+                {key: 'matchingPassword', name:'Repeat password', type: 'password'},
+                {key: 'email', name:'E-mail', type: 'e-mail'},
                 {key: 'name', name:'Name', type: 'text'}]
         };
         this.register = this.register.bind(this);
@@ -19,7 +21,10 @@ class Register extends Component {
 
     register = () => {
         let params = prepareFormData(store.getState().formReducer.values);
-
+        userService.register(params)
+            .then(res =>{
+                console.log(res);
+            })
     };
 
     render(){
