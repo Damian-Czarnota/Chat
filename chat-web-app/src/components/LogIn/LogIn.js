@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { register } from "../../Redux/actions";
 import { prepareFormData } from "../../utils/utils";
 import { store } from "../../Redux/store";
+import * as userService from "../../services/userService";
 
 const mapDispatchToProps = dispatch => {
     return { register: value => dispatch(register(value)) };
@@ -27,7 +28,11 @@ class LogIn extends Component {
 
     logIn = () => {
       let params = prepareFormData(store.getState().formReducer.values);
-
+      userService.login(params)
+          .then(res => {
+              console.log(res);
+          })
+          .catch(error => alert("Error has occured"));
     };
 
     render(){
@@ -36,7 +41,8 @@ class LogIn extends Component {
                     <p className="text--main">Log in into your account!</p>
                     <Form values={this.state.values} />
                     <button className="button button--big" onClick={this.logIn}>Start chatting!</button>
-                    <p className="text--second">Need an account? <button className="button button--link" onClick={this.showRegisterForm}>Sign up</button></p>
+                    <p className="text--second">Need an account? </p>
+                    <button className="button button--link" onClick={this.showRegisterForm}>Sign up</button>
             </Fragment>
         )
     }

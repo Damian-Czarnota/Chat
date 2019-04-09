@@ -24,10 +24,8 @@ class Form extends Component {
     handleChange = (event) => {
         let { target } = event;
         let { name } = target;
-        this.setState({
-            values: update(this.state.values,{[name]:{value: {$set: target.value}}})
-        });
-        this.props.completeForm(this.state.values);
+        this.props.values[name].value = target.value;
+        this.props.completeForm(this.props.values);
     };
 
     render() {
