@@ -1,13 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import Form from "../Form/Form";
 import { connect } from "react-redux";
-import { register } from "../../Redux/actions";
+import { register, isAdmin, authenticate } from "../../Redux/actions";
 import { prepareFormData } from "../../utils/utils";
 import { store } from "../../Redux/store";
 import * as userService from "../../services/userService";
+import * as storageService from "../../services/storageService";
 
 const mapDispatchToProps = dispatch => {
-    return { register: value => dispatch(register(value)) };
+    return { register: value => dispatch(register(value)),
+            isAdmin: value => dispatch(isAdmin(value)),
+            authenticate: value => dispatch(authenticate(value))};
 };
 
 class LogIn extends Component {
@@ -15,7 +18,7 @@ class LogIn extends Component {
     constructor(props){
         super(props);
         this.state = {
-            values: [{key: 'login', name:'Login', value: null, type: 'text'},
+            values: [{key: 'username', name:'Login', value: null, type: 'text'},
                 {key: 'password', name: 'Password', value: null, type: 'password'}]
         };
         this.showRegisterForm = this.showRegisterForm.bind(this);
@@ -30,9 +33,13 @@ class LogIn extends Component {
       let params = prepareFormData(store.getState().formReducer.values);
       userService.login(params)
           .then(res => {
-              console.log(res);
+              storageService.saveInStorage("Authorization", `${res.type} ${res.token}`);
+              this.props.isAdmin(res.isAdmin);
+              this.props.authenticate(true);
           })
-          .catch(error => alert("Error has occured"));
+          .catch(error => {
+              alert('Ops... Something went wrong')
+          });
     };
 
     render(){
@@ -48,4 +55,4 @@ class LogIn extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(LogIn)
+export default connect(null, mapDispatchToProps)(LogIn);

@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import LogIn from "../../components/LogIn/LogIn";
 import Register from "../../components/Register/Register";
-import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
-    return { register: state.authenticateReducer.register };
+    return { register: state.authenticateReducer.register,
+            authenticated: state.authenticateReducer.authenticated};
 };
 
 class Authenticate extends Component {
-    static propTypes = {
-        authenticated: PropTypes.bool.isRequired
-    };
 
     render() {
         let { authenticated, register } = this.props;

@@ -1,0 +1,39 @@
+@import "../../variables";
+
+.messages {
+  box-sizing: border-box;
+  width: 75vw;
+  &__header {
+    margin-left: 2px;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 2px solid #fff;
+  }
+  &__list {
+    overflow-y: scroll;
+    max-height: 70vh;
+  }
+}
+
+.message {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: white;
+  &__date {
+    color: $second-text;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin-top:10px;
+    &--my {
+      flex-direction: row-reverse;
+    }
+    }
+  &__author {
+    color: $second-text;
+  }
+}

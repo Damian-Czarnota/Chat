@@ -1,0 +1,40 @@
+@import "../../variables";
+
+.rooms {
+  width: 25vw;
+  height: 100vh;
+  border-right: 2px solid $main-gold;
+  &__header {
+    text-align: center;
+    font-weight: bold;
+    padding: 20px 0;
+    background-color: $main-gold;
+    border-bottom: 2px solid #fff;
+    color: $main-text;
+  }
+  &__list {
+    color: $second-text;
+    list-style-type: none;
+  }
+
+  &__item {
+    padding: 15px 20px;
+    border-bottom: 1px solid $third-gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:hover {
+      cursor: pointer;
+      border-bottom-color: $main-gold;
+      background-color: #fff;
+    }
+
+    &--no-hover {
+      &:hover {
+        cursor: default;
+        border-bottom-color: $third-gray;
+        background-color: transparent;
+      }
+    }
+  }
+}

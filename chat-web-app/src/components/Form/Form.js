@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './Form.scss';
 import {connect} from "react-redux";
 import { completeForm } from '../../Redux/actions';
-import update from "react-addons-update";
 
 const mapDispatchToProps = dispatch => {
     return { completeForm: value => dispatch(completeForm(value))}

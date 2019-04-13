@@ -4,6 +4,9 @@ import { withRouter  } from 'react-router-dom'
 import Authenticate from "../Authenticate/Authenticate";
 import { authenticate, isAdmin, setUserInfo } from '../../Redux/actions';
 import { connect } from "react-redux";
+import { getToken } from "../../utils/utils";
+import MainScreenApp from "../MainScreenApp/MainScreenApp";
+
 
 const mapStateToProps = state => {
     return { authenticated: state.authenticateReducer.authenticated };
@@ -25,14 +28,19 @@ class App extends Component {
   }
 
   componentWillMount() {
-      this.props.authenticate(false)
+      getToken()
+          ? this.props.authenticate(true)
+          : this.props.authenticate(false)
   }
 
     render() {
     return (
       <Fragment>
-          {this.props.authenticated!=null&&(
-              <Authenticate authenticated={this.props.authenticated}/>
+          {!this.props.authenticated&&(
+              <Authenticate />
+          )}
+          {this.props.authenticated&&(
+              <MainScreenApp />
           )}
       </Fragment>
     );

@@ -15,7 +15,7 @@ class Register extends Component {
     constructor(props){
         super(props);
         this.state = {
-            values: [{key: 'login', name: 'Login', type: 'text'},
+            values: [{key: 'username', name: 'Login', type: 'text'},
                 {key: 'password', name:'Password', type: 'password'},
                 {key: 'matchingPassword', name:'Repeat password', type: 'password'},
                 {key: 'email', name:'E-mail', type: 'e-mail'},

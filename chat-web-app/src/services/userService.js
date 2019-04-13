@@ -25,8 +25,8 @@ export const login = (form) =>
         body:JSON.stringify(form)
     })
         .then(res => {
-            if (res.status >= 400) {
+            if (res.status >= 400)
                 throw new Error("Bad response from server");
-            }
-        })
-        .then(res => res);
+            else
+                return res.json()
+        });
