@@ -70,3 +70,26 @@ body {
   height: 48px;
   border-radius: 50%;
 }
+
+.col {
+  display: flex;
+  &__half {
+    flex: 0 1 50%;
+  }
+  &__align {
+    &--center {
+      align-items: center;
+    }
+  }
+  &__justify {
+    &--right {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.info-text {
+  font-size: 13px;
+  color: $second-text;
+  padding: 10px;
+}
