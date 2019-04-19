@@ -93,3 +93,7 @@ body {
   color: $second-text;
   padding: 10px;
 }
+
+input[type='file']{
+  display: none;
+}
