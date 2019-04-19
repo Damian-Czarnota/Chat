@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import { prepareFormData } from "../../../utils/utils";
-import "./AddRoom.scss";
+import "../modals.scss";
 import Form from "../../Form/Form";
 import {store} from "../../../Redux/store";
-import * as roomService from '../../../services/roomService';
+import * as wsService from '../../../services/websocketService';
 
 const ModalTrigger = ({onOpen}) => <button className="btn circle circle--white" onClick={onOpen}><i className="fas fa-plus"></i></button>;
 
@@ -51,13 +51,8 @@ export default class AddRoom extends Component {
 
     addRoom = () => {
         let params = prepareFormData(store.getState().formReducer.values);
-        roomService.create(params)
-            .then(res => {
-                this.onClose();
-            })
-            .catch(error => {
-                alert('Ops... Something went wrong')
-            });
+        wsService.createRoom(params);
+        this.onClose();
     };
 
     render() {

@@ -1,8 +1,8 @@
 import fetch from 'cross-fetch'
-const URL = process.env.REACT_APP_API_URL;
+import {getToken} from "../utils/utils";
 
 export const create = (form) =>
-    fetch(`${URL}/rooms`,{
+    fetch(`${process.env.REACT_APP_API_URL}/rooms/create`,{
         method:'POST',
         headers:{
             'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const create = (form) =>
         });
 
 export const getRooms = () =>
-    fetch(`${URL}/rooms`,{
+    fetch(`${process.env.REACT_APP_API_URL}/rooms`,{
         method:'GET',
         headers:{
             'Content-Type': 'application/json',
@@ -31,7 +31,3 @@ export const getRooms = () =>
             else
                 return res.json()
         });
-
-export const getToken = () =>{
-    return localStorage.getItem('Authorization')
-};
