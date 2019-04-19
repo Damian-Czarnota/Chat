@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { AUTHENTICATE, REGISTER, SET_USER_INFO, IS_ADMIN, COMPLETE_FORM } from './actions';
+import {AUTHENTICATE, REGISTER, SET_USER_INFO, COMPLETE_FORM, ADD_ROOM, SET_PROFILE_IMAGE} from './actions';
 
 const userInitialState = {
     isAdmin: false,
@@ -12,15 +12,21 @@ const authenticationInitialState = {
     register: false
 };
 
+const roomsInitialState = {
+    rooms: []
+};
 
 function userReducer(state = userInitialState, action) {
     switch (action.type) {
         case SET_USER_INFO:
             return {...state,
                 userInfo: action.payload};
-        case IS_ADMIN:
+        case SET_PROFILE_IMAGE:
             return {...state,
-                isAdmin: action.payload};
+            userInfo: {
+                ...state.userInfo,
+                profileImage: action.payload
+            }};
         default:
             return state;
     }
@@ -50,10 +56,20 @@ function formReducer(state = [], action) {
     }
 }
 
+function roomsReducer(state = roomsInitialState, action) {
+    switch (action.type) {
+        case ADD_ROOM:
+            return {...state,
+                rooms: action.payload };
+        default:
+            return state;
+    }
+}
 const chatRootReducer = combineReducers({
     userReducer,
     authenticateReducer,
-    formReducer
+    formReducer,
+    roomsReducer
 });
 
 export default chatRootReducer

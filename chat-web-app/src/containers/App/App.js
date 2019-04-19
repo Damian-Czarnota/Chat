@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import './App.scss';
 import { withRouter  } from 'react-router-dom'
 import Authenticate from "../Authenticate/Authenticate";
-import { authenticate, isAdmin, setUserInfo } from '../../Redux/actions';
+import { authenticate } from '../../Redux/actions';
 import { connect } from "react-redux";
 import { getToken } from "../../utils/utils";
 import MainScreenApp from "../MainScreenApp/MainScreenApp";
@@ -13,9 +13,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {authenticate: value => dispatch(authenticate(value)),
-        setUserInfo: value => dispatch(setUserInfo(value)),
-        isAdmin: value => dispatch(isAdmin(value))};
+    return {authenticate: value => dispatch(authenticate(value))};
 };
 
 class App extends Component {

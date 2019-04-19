@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import Form from "../Form/Form";
 import { connect } from "react-redux";
-import { register, isAdmin, authenticate } from "../../Redux/actions";
+import { register, authenticate } from "../../Redux/actions";
 import { prepareFormData } from "../../utils/utils";
 import { store } from "../../Redux/store";
 import * as userService from "../../services/userService";
@@ -9,7 +9,6 @@ import * as storageService from "../../services/storageService";
 
 const mapDispatchToProps = dispatch => {
     return { register: value => dispatch(register(value)),
-            isAdmin: value => dispatch(isAdmin(value)),
             authenticate: value => dispatch(authenticate(value))};
 };
 
