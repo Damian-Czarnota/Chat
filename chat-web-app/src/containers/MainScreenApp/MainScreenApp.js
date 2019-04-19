@@ -2,11 +2,23 @@ import React, {Component, Fragment} from "react";
 import Rooms from "../../components/Rooms/Rooms";
 import Messages from "../../components/Messages/Messages";
 import Users from "../../components/Users/Users";
-import SockJS from 'sockjs-client'
-import Stomp from 'stompjs'
 import * as roomService from "../../services/roomService";
+import * as loggedUserService from "../../services/loggedUserService";
+import { addRoom, setUserInfo } from "../../Redux/actions";
+import { connect } from "react-redux";
+import ProfileConfigurator from "../../components/Modals/ProfileConfigurator/ProfileConfigurator";
 
-export default class MainScreenApp extends Component {
+const mapStateToProps = state => {
+    return { rooms: state.roomsReducer.rooms,
+             userInfo: state.userReducer.userInfo};
+};
+
+const mapDispatchToProps = dispatch => {
+    return { setUserInfo: value => dispatch(setUserInfo(value)),
+        addRooms: value => dispatch(addRoom(value))};
+};
+
+class MainScreenApp extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -14,30 +26,25 @@ export default class MainScreenApp extends Component {
             rooms: []
         };
         this.messages = [];
-        this.socket = null;
-        this.client = null;
     }
 
     componentWillMount(){
+        loggedUserService.get()
+            .then((res) => {
+                this.props.setUserInfo(res);
+            });
         roomService.getRooms()
             .then(({rooms}) => {
-               this.setState({rooms: rooms}) ;
+               this.props.addRooms(rooms) ;
             });
-        this.socket = new SockJS("http://localhost:8001/api/auth/ws");
-        this.client = Stomp.over(this.socket);
     }
-    componentDidMount(){
-        this.client.connect({}, () => {
-            this.client.subscribe('/topic/rooms', (message) => {
-                console.log(JSON.parse(message.body));
-            })
-        });
 
-    };
     render() {
-        let { isInRoom, rooms } = this.state;
+        let { isInRoom } = this.state;
+        let { rooms, userInfo } = this.props;
         return(
             <div className="container">
+                <ProfileConfigurator profileImage={userInfo.profileImage}/>
                 {isInRoom&&(
                     <Fragment>
                         <Users users={this.data}/>
@@ -57,3 +64,5 @@ export default class MainScreenApp extends Component {
         )
     }
 }
+
+export default connect(mapStateToProps,mapDispatchToProps)(MainScreenApp)
