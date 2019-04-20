@@ -6,6 +6,7 @@ export const ADD_ROOM = 'ADD_ROOM';
 export const SET_PROFILE_IMAGE = 'SET_PROFILE_IMAGE';
 export const IS_IN_ROOM = 'IS_IN_ROOM';
 export const SET_USERS = 'SET_USERS';
+export const ADD_MESSAGES = 'ADD_MESSAGES';
 
 export const authenticate = value => ({
     type: AUTHENTICATE,
@@ -44,5 +45,10 @@ export const isInRoom = value =>({
 
 export const setUsersInRoom = value =>({
     type: SET_USERS,
+    payload: value
+});
+
+export const addMessages = value =>({
+    type: ADD_MESSAGES,
     payload: value
 });

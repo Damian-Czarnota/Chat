@@ -3,11 +3,17 @@ import "./rooms.scss";
 import AddRoom from "../Modals/AddRoom/AddRoom";
 import * as roomService from "../../services/roomService";
 import * as storageService from "../../services/storageService";
-import {isInRoom} from "../../Redux/actions";
+import * as wsService from "../../services/websocketService";
+import {addRoom, isInRoom} from "../../Redux/actions";
 import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+    return { rooms: state.roomsReducer.rooms};
+};
+
 const mapDispatchToProps = dispatch => {
-    return {isInRoom: value => dispatch(isInRoom(value))};
+    return {isInRoom: value => dispatch(isInRoom(value)),
+            addRooms: value => dispatch(addRoom(value))};
 };
 
 class Rooms extends Component {
@@ -16,9 +22,22 @@ class Rooms extends Component {
         this.connectToRoom = this.connectToRoom.bind(this);
     }
 
-    connectToRoom = (ID) => {
-        roomService.connectToRoom(ID).then(res =>{
-            storageService.saveInStorage("RoomID", ID);
+    componentWillMount() {
+        roomService.getRooms()
+            .then(({rooms}) => {
+                this.props.addRooms(rooms) ;
+            });
+        wsService.subscribeToRooms();
+    }
+
+    componentWillUnmount() {
+        wsService.disconnectFromRooms();
+    }
+
+    connectToRoom = (room) => {
+        roomService.connectToRoom(room.id).then(res =>{
+            storageService.saveInStorage("RoomID", room.id);
+            storageService.saveInStorage("RoomName", room.name);
             this.props.isInRoom(true);
         })
     };
@@ -37,7 +56,7 @@ class Rooms extends Component {
                 </div>
                 <div className="rooms__list">
                     <ul>{rooms&&rooms.map((room, key) =>(
-                        <li key={key} className="rooms__item" onClick={(e) => this.connectToRoom(room.id)}>
+                        <li key={key} className="rooms__item" onClick={(e) => this.connectToRoom(room)}>
                             <span>{room.name}</span>
                             <span>{room.numberOfUsers}&nbsp;<i className="fa fa-users"/> </span>
                         </li>
@@ -51,4 +70,4 @@ class Rooms extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Rooms);
+export default connect(mapStateToProps, mapDispatchToProps)(Rooms);

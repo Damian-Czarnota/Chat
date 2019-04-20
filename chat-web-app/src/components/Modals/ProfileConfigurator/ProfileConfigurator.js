@@ -2,15 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import "../modals.scss";
 import * as loggedUserService from '../../../services/loggedUserService';
+import * as storageService from "../../../services/storageService";
 import DisplayAvatar from "../../DisplayAvatar/DisplayAvatar";
-import { setUserInfo } from "../../../Redux/actions";
+import {authenticate, setUserInfo} from "../../../Redux/actions";
 import { connect } from "react-redux";
 
 const ModalTrigger = ({onOpen, profileImage}) => <button className="circle profile-changer" onClick={onOpen}>
     <DisplayAvatar size={42} profileImage={profileImage}/>
 </button>;
 
-const ModalContent = ({onClose, changeAvatar, profileImage}) => {
+const ModalContent = ({onClose, changeAvatar, profileImage, logout}) => {
     return createPortal(
         <aside className="cover">
             <div className="modal">
@@ -26,6 +27,9 @@ const ModalContent = ({onClose, changeAvatar, profileImage}) => {
                         <button className="button">
                             <label>Change<input type="file" accept="image/*" onChange={(e) => changeAvatar(e)} /></label>
                         </button>
+                        <button className="button button--danger" onClick={logout}>
+                            Logout
+                        </button>
                     </div>
                 </div>
             </div>
@@ -36,7 +40,8 @@ const ModalContent = ({onClose, changeAvatar, profileImage}) => {
 
 
 const mapDispatchToProps = dispatch => {
-    return {setUserInfo: value => dispatch(setUserInfo(value))};
+    return {setUserInfo: value => dispatch(setUserInfo(value)),
+            authenticate: value => dispatch(authenticate(value))};
 };
 
 
@@ -74,13 +79,18 @@ class ProfileConfigurator extends Component {
         )
     };
 
+    logout = () => {
+        storageService.deleteFromStorage("Authorization");
+        this.props.authenticate(false);
+    };
+
     render() {
         let { profileImage } = this.props;
         return (
             <Fragment>
                 <ModalTrigger onOpen={this.onOpen} profileImage={profileImage} />
                 {this.state.isOpen&&(
-                    <ModalContent onClose={this.onClose} changeAvatar={this.changeAvatar} profileImage={profileImage} />) }
+                    <ModalContent onClose={this.onClose} changeAvatar={this.changeAvatar} profileImage={profileImage} logout={this.logout} />) }
             </Fragment>
         );
     };

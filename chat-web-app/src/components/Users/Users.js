@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "../Rooms/rooms.scss";
 import * as roomService from "../../services/roomService";
 import * as storageService from "../../services/storageService";
-import {isInRoom} from "../../Redux/actions";
+import * as wsService from "../../services/websocketService";
+import { isInRoom, setUsersInRoom } from "../../Redux/actions";
 import { connect } from "react-redux";
 
 
 const mapDispatchToProps = dispatch => {
-    return { isInRoom: value => dispatch(isInRoom(value))}
+    return { isInRoom: value => dispatch(isInRoom(value)),
+             setUsersInRoom: value => dispatch(setUsersInRoom(value))}
 };
 
 const mapStateToProps = state => {
@@ -18,6 +20,18 @@ class Users extends Component {
     constructor(props){
         super(props);
         this.leaveRoom = this.leaveRoom.bind(this);
+        this.roomID = storageService.getFromStorage("RoomID");
+    }
+
+    componentWillMount() {
+        roomService.getUsersInRoom(this.roomID).then(res => {
+            this.props.setUsersInRoom(res.users);
+        });
+        wsService.subscribeToRoomUsers(this.roomID)
+    }
+
+    componentWillUnmount() {
+        wsService.disconnectFromRoomUsers();
     }
 
     leaveRoom = () => {
@@ -40,10 +54,9 @@ class Users extends Component {
                     </div>
                 </div>
                 <div className="rooms__list">
-                    <ul>{users&&users.map((room, key) =>(
+                    <ul>{users&&users.map((user, key) =>(
                         <li key={key} className="rooms__item rooms__item--no-hover">
-                            <img src="" className="avatar" />
-                            {room.name}
+                            {user.name}
                         </li>
                     ))}
                     </ul>
@@ -53,4 +66,4 @@ class Users extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { getToken } from "../../utils/utils";
 import MainScreenApp from "../MainScreenApp/MainScreenApp";
 import * as storageService from "../../services/storageService";
+import * as wsService from "../../services/websocketService";
 
 const mapStateToProps = state => {
     return { authenticated: state.authenticateReducer.authenticated };
@@ -19,6 +20,13 @@ const mapDispatchToProps = dispatch => {
 
 class App extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      connected:false
+    };
+    this.setConnected = this.setConnected.bind(this);
+}
   componentDidMount(){
     const spinner = document.querySelector('.loading');
     if (spinner && !spinner.hasAttribute('hidden')) {
@@ -27,11 +35,16 @@ class App extends Component {
   }
 
   componentWillMount() {
+    wsService.createConnection(this.setConnected);
       getToken()
           ? this.authenticate()
           : this.props.authenticate(false)
 
   }
+
+  setConnected = () => {
+    this.setState({connected:true})
+  };
 
   authenticate = () => {
     this.props.authenticate(true);
@@ -46,7 +59,7 @@ class App extends Component {
           {!this.props.authenticated&&(
               <Authenticate />
           )}
-          {this.props.authenticated&&(
+          {this.props.authenticated&&this.state.connected&&(
               <MainScreenApp />
           )}
       </Fragment>

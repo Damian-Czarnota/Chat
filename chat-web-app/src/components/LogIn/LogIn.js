@@ -33,12 +33,8 @@ class LogIn extends Component {
       userService.login(params)
           .then(res => {
               storageService.saveInStorage("Authorization", `${res.type} ${res.token}`);
-              this.props.isAdmin(res.isAdmin);
               this.props.authenticate(true);
           })
-          .catch(error => {
-              alert('Ops... Something went wrong')
-          });
     };
 
     render(){

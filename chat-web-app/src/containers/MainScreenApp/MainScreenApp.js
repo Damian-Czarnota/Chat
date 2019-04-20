@@ -2,43 +2,30 @@ import React, {Component, Fragment} from "react";
 import Rooms from "../../components/Rooms/Rooms";
 import Messages from "../../components/Messages/Messages";
 import Users from "../../components/Users/Users";
-import * as roomService from "../../services/roomService";
 import * as loggedUserService from "../../services/loggedUserService";
-import * as wsService from "../../services/websocketService";
-import { addRoom, setUserInfo } from "../../Redux/actions";
+import { setUserInfo } from "../../Redux/actions";
 import { connect } from "react-redux";
 import ProfileConfigurator from "../../components/Modals/ProfileConfigurator/ProfileConfigurator";
 
 const mapStateToProps = state => {
-    return { rooms: state.roomsReducer.rooms,
-             isInRoom: state.roomsReducer.isInRoom,
+    return { isInRoom: state.roomsReducer.isInRoom,
              userInfo: state.userReducer.userInfo};
 };
 
 const mapDispatchToProps = dispatch => {
-    return { setUserInfo: value => dispatch(setUserInfo(value)),
-            addRooms: value => dispatch(addRoom(value))};
+    return { setUserInfo: value => dispatch(setUserInfo(value))};
 };
 
 class MainScreenApp extends Component {
-    constructor(props){
-        super(props);
-    }
-
-    componentWillMount(){
+     componentDidMount(){
         loggedUserService.get()
             .then((res) => {
                 this.props.setUserInfo(res);
             });
-        roomService.getRooms()
-            .then(({rooms}) => {
-               this.props.addRooms(rooms) ;
-            });
-        wsService.subscribeToRooms();
     }
 
     render() {
-        let { rooms, userInfo, isInRoom } = this.props;
+        let { userInfo, isInRoom } = this.props;
         return(
             <div className="container">
                 <ProfileConfigurator profileImage={userInfo.profileImage}/>
@@ -50,7 +37,7 @@ class MainScreenApp extends Component {
                 )}
                 {!isInRoom&&(
                     <Fragment>
-                        <Rooms rooms={rooms} />
+                        <Rooms />
                         <div className="advert">
                             <p>Select your room and start chatting now!</p>
                         </div>

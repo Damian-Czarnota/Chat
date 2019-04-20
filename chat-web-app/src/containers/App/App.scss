@@ -34,7 +34,7 @@ body {
 .button {
   color: $main-text;
   padding: 10px 20px;
-  margin: 10px 0;
+  margin: 10px 5px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
   &--link {
@@ -49,6 +49,10 @@ body {
   &--big {
     padding: 15px 25px;
     font-size:15px;
+  }
+  &--danger {
+    background-color: #7a0029;
+    color: white;
   }
 }
 
@@ -84,6 +88,11 @@ body {
   &__justify {
     &--right {
       justify-content: flex-end;
+    }
+  }
+  &__direction {
+    &--col {
+      flex-direction: column;
     }
   }
 }

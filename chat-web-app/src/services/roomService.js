@@ -32,8 +32,8 @@ export const getRooms = () =>
                 return res.json()
         });
 
-export const connectToRoom = (ID) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/rooms/connect`, {
+export const connectToRoom = (ID) =>
+    fetch(`${process.env.REACT_APP_API_URL}/rooms/connect`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -47,7 +47,6 @@ export const connectToRoom = (ID) => {
             else
                 return res;
         });
-};
 
 export const disconnect = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/rooms/disconnect`, {
@@ -64,3 +63,34 @@ export const disconnect = () => {
                 return res;
         });
 };
+
+export const sendMessage = (content, roomID) =>
+    fetch(`${process.env.REACT_APP_API_URL}/messages/${roomID}`,{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': getToken()
+        },
+        body:JSON.stringify({content: content})
+    })
+        .then(res => {
+            if (res.status >= 400)
+                throw new Error("Bad response from server");
+            else
+                return res
+        });
+
+export const getUsersInRoom = (ID) =>
+    fetch(`${process.env.REACT_APP_API_URL}/rooms/${ID}/users`,{
+        method:'GET',
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': getToken()
+        }
+    })
+        .then(res => {
+            if (res.status >= 400)
+                throw new Error("Bad response from server");
+            else
+                return res.json()
+        });
