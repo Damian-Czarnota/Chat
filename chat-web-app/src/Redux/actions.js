@@ -4,6 +4,8 @@ export const SET_USER_INFO = 'SET_USER_INFO';
 export const COMPLETE_FORM = 'COMPLETE_FORM';
 export const ADD_ROOM = 'ADD_ROOM';
 export const SET_PROFILE_IMAGE = 'SET_PROFILE_IMAGE';
+export const IS_IN_ROOM = 'IS_IN_ROOM';
+export const SET_USERS = 'SET_USERS';
 
 export const authenticate = value => ({
     type: AUTHENTICATE,
@@ -32,5 +34,15 @@ export const completeForm = value =>({
 
 export const addRoom = value =>({
     type: ADD_ROOM,
+    payload: value
+});
+
+export const isInRoom = value =>({
+    type: IS_IN_ROOM,
+    payload: value
+});
+
+export const setUsersInRoom = value =>({
+    type: SET_USERS,
     payload: value
 });

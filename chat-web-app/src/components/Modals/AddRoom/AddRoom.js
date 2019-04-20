@@ -4,7 +4,7 @@ import { prepareFormData } from "../../../utils/utils";
 import "../modals.scss";
 import Form from "../../Form/Form";
 import {store} from "../../../Redux/store";
-import * as wsService from '../../../services/websocketService';
+import * as roomService from '../../../services/roomService';
 
 const ModalTrigger = ({onOpen}) => <button className="btn circle circle--white" onClick={onOpen}><i className="fas fa-plus"></i></button>;
 
@@ -51,7 +51,7 @@ export default class AddRoom extends Component {
 
     addRoom = () => {
         let params = prepareFormData(store.getState().formReducer.values);
-        wsService.createRoom(params);
+        roomService.create(params);
         this.onClose();
     };
 

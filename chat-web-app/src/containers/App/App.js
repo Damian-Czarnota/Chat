@@ -2,18 +2,19 @@ import React, {Component, Fragment} from 'react';
 import './App.scss';
 import { withRouter  } from 'react-router-dom'
 import Authenticate from "../Authenticate/Authenticate";
-import { authenticate } from '../../Redux/actions';
+import { authenticate, isInRoom } from '../../Redux/actions';
 import { connect } from "react-redux";
 import { getToken } from "../../utils/utils";
 import MainScreenApp from "../MainScreenApp/MainScreenApp";
-
+import * as storageService from "../../services/storageService";
 
 const mapStateToProps = state => {
     return { authenticated: state.authenticateReducer.authenticated };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {authenticate: value => dispatch(authenticate(value))};
+    return {authenticate: value => dispatch(authenticate(value)),
+            isInRoom: value => dispatch(isInRoom(value))};
 };
 
 class App extends Component {
@@ -27,9 +28,17 @@ class App extends Component {
 
   componentWillMount() {
       getToken()
-          ? this.props.authenticate(true)
+          ? this.authenticate()
           : this.props.authenticate(false)
+
   }
+
+  authenticate = () => {
+    this.props.authenticate(true);
+    storageService.getFromStorage("RoomID")
+      ? this.props.isInRoom(true)
+      : this.props.isInRoom(false)
+  };
 
     render() {
     return (

@@ -11,6 +11,7 @@ import ProfileConfigurator from "../../components/Modals/ProfileConfigurator/Pro
 
 const mapStateToProps = state => {
     return { rooms: state.roomsReducer.rooms,
+             isInRoom: state.roomsReducer.isInRoom,
              userInfo: state.userReducer.userInfo};
 };
 
@@ -22,11 +23,6 @@ const mapDispatchToProps = dispatch => {
 class MainScreenApp extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            isInRoom: false,
-            rooms: []
-        };
-        this.messages = [];
     }
 
     componentWillMount(){
@@ -42,14 +38,13 @@ class MainScreenApp extends Component {
     }
 
     render() {
-        let { isInRoom } = this.state;
-        let { rooms, userInfo } = this.props;
+        let { rooms, userInfo, isInRoom } = this.props;
         return(
             <div className="container">
                 <ProfileConfigurator profileImage={userInfo.profileImage}/>
                 {isInRoom&&(
                     <Fragment>
-                        <Users users={this.data}/>
+                        <Users />
                         <Messages messages={this.messages} />
                     </Fragment>
                 )}

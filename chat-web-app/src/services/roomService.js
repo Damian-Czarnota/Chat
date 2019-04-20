@@ -2,7 +2,7 @@ import fetch from 'cross-fetch'
 import {getToken} from "../utils/utils";
 
 export const create = (form) =>
-    fetch(`${process.env.REACT_APP_API_URL}/rooms/create`,{
+    fetch(`${process.env.REACT_APP_API_URL}/rooms`,{
         method:'POST',
         headers:{
             'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ export const create = (form) =>
             if (res.status >= 400)
                 throw new Error("Bad response from server");
             else
-                return res.json()
+                return res
         });
 
 export const getRooms = () =>
@@ -31,3 +31,36 @@ export const getRooms = () =>
             else
                 return res.json()
         });
+
+export const connectToRoom = (ID) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/rooms/connect`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken()
+        },
+        body:JSON.stringify({id:ID})
+    })
+        .then(res => {
+            if (res.status >= 400)
+                throw new Error("Bad response from server");
+            else
+                return res;
+        });
+};
+
+export const disconnect = () => {
+    return fetch(`${process.env.REACT_APP_API_URL}/rooms/disconnect`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken()
+        }
+    })
+        .then(res => {
+            if (res.status >= 400)
+                throw new Error("Bad response from server");
+            else
+                return res;
+        });
+};

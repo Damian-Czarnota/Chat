@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {AUTHENTICATE, REGISTER, SET_USER_INFO, COMPLETE_FORM, ADD_ROOM, SET_PROFILE_IMAGE} from './actions';
+import {AUTHENTICATE, REGISTER, SET_USER_INFO, COMPLETE_FORM, ADD_ROOM, SET_PROFILE_IMAGE, IS_IN_ROOM, SET_USERS } from './actions';
 
 const userInitialState = {
     isAdmin: false,
@@ -13,7 +13,9 @@ const authenticationInitialState = {
 };
 
 const roomsInitialState = {
-    rooms: []
+    rooms: [],
+    isInRoom: false,
+    usersInRoom: []
 };
 
 function userReducer(state = userInitialState, action) {
@@ -61,6 +63,12 @@ function roomsReducer(state = roomsInitialState, action) {
         case ADD_ROOM:
             return {...state,
                 rooms: action.payload };
+        case IS_IN_ROOM:
+            return {...state,
+                isInRoom: action.payload };
+        case SET_USERS:
+            return {...state,
+                usersInRoom: action.payload };
         default:
             return state;
     }

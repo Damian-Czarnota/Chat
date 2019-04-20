@@ -11,11 +11,17 @@ export const subscribeToRooms = () => {
     client.connect({}, () => {
         client.subscribe('/topic/rooms', (message) => {
             let response = JSON.parse(message.body);
+            console.log(response);
             store.dispatch(addRoom(response.rooms));
         })
     });
 };
 
-export const createRoom = (params) => {
-    client.send("/api/rooms/create", {}, JSON.stringify(params))
+export const subscribeToRoom = (ID) => {
+    client.connect({}, () => {
+        client.subscribe('/topic/rooms/id', (message) => {
+            let response = JSON.parse(message.body);
+            console.log(response);
+        })
+    });
 };

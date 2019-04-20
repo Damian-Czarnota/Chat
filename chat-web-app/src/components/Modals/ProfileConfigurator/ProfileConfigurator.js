@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import "../modals.scss";
 import * as loggedUserService from '../../../services/loggedUserService';
 import DisplayAvatar from "../../DisplayAvatar/DisplayAvatar";
-import { setUserInfo, setProfileImage } from "../../../Redux/actions";
+import { setUserInfo } from "../../../Redux/actions";
 import { connect } from "react-redux";
 
 const ModalTrigger = ({onOpen, profileImage}) => <button className="circle profile-changer" onClick={onOpen}>
