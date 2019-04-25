@@ -18,7 +18,7 @@ export default class StartUsingButton extends Component {
         let { text, withoutDescription } = this.props;
         return(
             <div className="enjoy">
-                <a className="button button--big button--primary" href={process.env.REACT_APP_WEB_APP_REGISTER}>{text}</a>
+                <a className="button button--big button--primary" href={process.env.REACT_APP_WEB_APP_URL}>{text}</a>
                 {!withoutDescription&&(
                     <SVGFill />)}
             </div>
