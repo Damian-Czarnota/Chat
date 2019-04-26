@@ -12,7 +12,8 @@ import {formDate} from "../../utils/utils";
 
 
 const mapStateToProps = state => {
-    return { messages: state.roomsReducer.messages}
+    return { messages: state.roomsReducer.messages,
+             userInfo: state.userReducer.userInfo}
 };
 
 const mapDispatchToProps = dispatch => {
@@ -53,7 +54,7 @@ class Messages extends Component {
 
     render() {
         let { roomID } = this.state;
-        let { messages } = this.props;
+        let { messages, userInfo } = this.props;
         return(
             <div className="messages">
                 <div className="messages__header">
@@ -68,7 +69,7 @@ class Messages extends Component {
                                     {message.content}
                                 </div>
                                 <div className="col col__align--center col__direction--col">
-                                    <DisplayAvatar size={64} profileImage={message.author.profileImage} />
+                                    <DisplayAvatar size={64} profileImage={message.isMine?userInfo.profileImage:message.author.profileImage} />
                                     <p className="message__author">{message.author.name}</p>
                                 </div>
                             </div>
