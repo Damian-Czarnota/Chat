@@ -1,5 +1,6 @@
 import fetch from 'cross-fetch'
 import {getToken} from "../utils/utils";
+import customError from "../utils/customError";
 
 export const get = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/me`, {
@@ -10,7 +11,7 @@ export const get = () => {
     })
         .then(res => {
             if (res.status >= 400)
-                throw new Error("Bad response from server");
+                return new customError(res.type, res.ok, res.status);
             else
                 return res.json()
         });

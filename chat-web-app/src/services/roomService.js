@@ -27,7 +27,7 @@ export const getRooms = () =>
     })
         .then(res => {
             if (res.status >= 400)
-                throw new Error("Bad response from server");
+                return new Error(res);
             else
                 return res.json()
         });
