@@ -20,35 +20,81 @@ class Register extends Component {
                 {key: 'matchingPassword', name:'Repeat password', type: 'password'},
                 {key: 'email', name:'E-mail', type: 'e-mail'},
                 {key: 'name', name:'Name', type: 'text'}],
-            registered: false
+            registered: false,
+            usernameIsTaken: false,
+            emailIsTaken: false,
+            invalidEmail: false,
+            passwordsDoesntMatch: false
         };
         this.register = this.register.bind(this);
         this.showLoginForm = this.showLoginForm.bind(this);
+        this.resetErrors = this.resetErrors.bind(this);
     }
 
     showLoginForm = () => {
         this.props.register(false);
     };
 
+    resetErrors = () => {
+        this.setState({usernameIsTaken: false,
+            emailIsTaken: false,
+            invalidEmail: false,
+            passwordsDoesntMatch: false})
+    };
 
     register = () => {
+        this.resetErrors();
         let params = prepareFormData(store.getState().formReducer.values);
         userService.register(params)
             .then(res =>{
                     this.setState({registered:true})
             })
-            .catch(error => { alert("Error has occured") })
+            .catch(error => {
+                error.then(e => {
+                    switch(e.code) {
+                        case 2:
+                            this.setState({usernameIsTaken: true});
+                            break;
+                        case 3:
+                            this.setState({emailIsTaken: true});
+                            break;
+                    }
+                    if(e.errors)
+                        e.errors.forEach(item => {
+                            if(item.code==="ValidEmail")
+                                this.setState({invalidEmail: true});
+                            if(item.code==="PasswordMatches")
+                                this.setState({passwordsDoesntMatch: true});
+                        })
+                })
+            })
     };
 
     render(){
-        let { registered } = this.state;
+        let { registered, usernameIsTaken, emailIsTaken, passwordsDoesntMatch, invalidEmail } = this.state;
         return(
             <Fragment>
                 {!registered&&(
                     <Fragment>
                         <p className="text--main">Let's start from creating account</p>
                         <Form values={this.state.values} handleChange={this.handleChange}/>
-                        <button className="button button--big" onClick={this.register}>Sign up</button>
+                        {usernameIsTaken&&(
+                            <p className="text--danger">Username already is in use</p>
+                        )}
+                        {emailIsTaken&&(
+                            <p className="text--danger">Email already is in use</p>
+                        )}
+                        {passwordsDoesntMatch&&(
+                            <p className="text--danger">Your passwords doesn't match</p>
+                        )}
+                        {invalidEmail&&(
+                            <p className="text--danger">Please type valid mail</p>
+                        )}
+                        <button className={`button button--big
+                        ${usernameIsTaken||emailIsTaken||passwordsDoesntMatch||invalidEmail
+                            ? 'button--danger error--animation'
+                            : ''}` }
+                        onClick={this.register}>Sign up</button>
                     </Fragment>
                 )}
                 {registered&&(

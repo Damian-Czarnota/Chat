@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch'
+import customError from "../utils/customError";
 const URL = process.env.REACT_APP_API_URL;
 
 export const register = (form) =>
@@ -11,7 +12,7 @@ export const register = (form) =>
     })
         .then(res => {
             if (res.status >= 400) {
-                throw new Error("Bad response from server");
+                throw res.json();
             }
         })
         .then(res => res);
@@ -25,8 +26,9 @@ export const login = (form) =>
         body:JSON.stringify(form)
     })
         .then(res => {
-            if (res.status >= 400)
-                throw new Error("Bad response from server");
+            if (res.status >= 400){
+                throw res.json();
+            }
             else
                 return res.json()
         });
