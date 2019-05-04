@@ -3,17 +3,19 @@ import "../Rooms/rooms.scss";
 import * as roomService from "../../services/roomService";
 import * as storageService from "../../services/storageService";
 import * as wsService from "../../services/websocketService";
-import { isInRoom, setUsersInRoom } from "../../Redux/actions";
+import {isInRoom, setUsersInRoom, toggleLeftBar} from "../../Redux/actions";
 import { connect } from "react-redux";
 
 
 const mapDispatchToProps = dispatch => {
     return { isInRoom: value => dispatch(isInRoom(value)),
-             setUsersInRoom: value => dispatch(setUsersInRoom(value))}
+             setUsersInRoom: value => dispatch(setUsersInRoom(value)),
+            toggleLeftBar: value => dispatch(toggleLeftBar(value))}
 };
 
 const mapStateToProps = state => {
-    return { users: state.roomsReducer.usersInRoom }
+    return { users: state.roomsReducer.usersInRoom,
+            leftBarState: state.leftBarReducer.open }
 };
 
 class Users extends Component {
@@ -42,9 +44,9 @@ class Users extends Component {
     };
 
     render() {
-        let { users } = this.props;
+        let { users, leftBarState } = this.props;
         return (
-            <div className="rooms">
+            <div className={`rooms ${leftBarState ? '' : 'rooms--hide'}`}>
                 <div className="rooms__header">
                     <div className="col col__half col__align--center col__justify--right">
                         Users
@@ -56,10 +58,16 @@ class Users extends Component {
                 <div className="rooms__list">
                     <ul>{users&&users.map((user, key) =>(
                         <li key={key} className="rooms__item rooms__item--no-hover">
-                            {user.name}
+                            <p className="rooms__room"> {user.name}</p>
                         </li>
                     ))}
                     </ul>
+                </div>
+                <div className="toggle">
+                    <button className={`button toggle__button ${leftBarState ? '' : 'toggle__button--hide'}`}
+                            onClick={(e) => this.props.toggleLeftBar(!leftBarState)}>
+                        <span className={`fas ${leftBarState ? 'fa-chevron-left' : 'fa-chevron-right'}`}></span>
+                    </button>
                 </div>
             </div>
         )

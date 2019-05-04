@@ -4,6 +4,10 @@
   width: 25vw;
   height: 100vh;
   border-right: 2px solid $main-gold;
+  transition: 0.5s;
+  &--hide {
+    transform: none;
+  }
   &__header {
     display: flex;
     font-weight: bold;
@@ -13,6 +17,9 @@
     color: $main-text;
   }
   &__list {
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
     color: $second-text;
     list-style-type: none;
   }
@@ -28,7 +35,6 @@
       border-bottom-color: $main-gold;
       background-color: #fff;
     }
-
     &--no-hover {
       &:hover {
         cursor: default;
@@ -36,5 +42,46 @@
         background-color: transparent;
       }
     }
+  }
+  &__room {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 85%;
+  }
+}
+
+.toggle {
+  display: none;
+  width: 100%;
+  &__button {
+    float: right;
+    padding: 5px 15px;
+    transition: 0.5s;
+    &--hide {
+      transform: translateX(125%);
+      transition: 0.5s;
+    }
+  }
+}
+
+@media screen and (max-width: 850px){
+  .rooms {
+    position: absolute;
+    width: 50vh;
+    top: 0;
+    left: 0;
+    background-color: $fourth-gray;
+    z-index: 2;
+    &--hide {
+      transform: translateX(-100%);
+      transition: 0.5s;
+    }
+    &__room {
+      width: 45vh;
+      text-overflow: ellipsis;
+    }
+  }
+  .toggle {
+    display: block;
   }
 }

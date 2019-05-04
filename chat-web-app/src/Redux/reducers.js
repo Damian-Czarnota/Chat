@@ -8,7 +8,8 @@ import {
     SET_PROFILE_IMAGE,
     IS_IN_ROOM,
     SET_USERS,
-    ADD_MESSAGES
+    ADD_MESSAGES,
+    TOGGLE_LEFT_BAR
 } from './actions';
 
 const userInitialState = {
@@ -26,6 +27,10 @@ const roomsInitialState = {
     isInRoom: false,
     usersInRoom: [],
     messages: []
+};
+
+const leftBarInitialState = {
+    open: true
 };
 
 function userReducer(state = userInitialState, action) {
@@ -88,11 +93,23 @@ function roomsReducer(state = roomsInitialState, action) {
             return state;
     }
 }
+
+function leftBarReducer(state = leftBarInitialState, action) {
+    switch (action.type) {
+        case TOGGLE_LEFT_BAR:
+            return {...state,
+            open: action.payload
+            };
+        default:
+            return state;
+    }
+}
 const chatRootReducer = combineReducers({
     userReducer,
     authenticateReducer,
     formReducer,
-    roomsReducer
+    roomsReducer,
+    leftBarReducer
 });
 
 export default chatRootReducer

@@ -7,6 +7,7 @@ export const SET_PROFILE_IMAGE = 'SET_PROFILE_IMAGE';
 export const IS_IN_ROOM = 'IS_IN_ROOM';
 export const SET_USERS = 'SET_USERS';
 export const ADD_MESSAGES = 'ADD_MESSAGES';
+export const TOGGLE_LEFT_BAR = 'TOGGLE_LEFT_BAR';
 
 export const authenticate = value => ({
     type: AUTHENTICATE,
@@ -50,5 +51,10 @@ export const setUsersInRoom = value =>({
 
 export const addMessages = value =>({
     type: ADD_MESSAGES,
+    payload: value
+});
+
+export const toggleLeftBar = value => ({
+    type: TOGGLE_LEFT_BAR,
     payload: value
 });
