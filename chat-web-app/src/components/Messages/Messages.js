@@ -8,7 +8,7 @@ import * as messageService from "../../services/messageService";
 import {connect} from "react-redux";
 import DisplayAvatar from "../DisplayAvatar/DisplayAvatar";
 import {addMessages} from "../../Redux/actions";
-import {formDate} from "../../utils/utils";
+import {formDate, markMessages} from "../../utils/utils";
 
 
 const mapStateToProps = state => {
@@ -35,7 +35,7 @@ class Messages extends Component {
     componentDidMount() {
         wsService.subscribeToRoomMessages(this.state.roomID);
         messageService.get(this.state.roomID).then(res => {
-            this.props.addMessages(res);
+            this.props.addMessages(markMessages(res, this.props.userInfo.id));
         });
     }
 
