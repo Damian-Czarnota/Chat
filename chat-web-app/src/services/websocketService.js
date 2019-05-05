@@ -2,6 +2,7 @@ import SockJS from 'sockjs-client'
 import Stomp from 'stompjs'
 import { store } from "../Redux/store";
 import { addRoom, addMessages, setUsersInRoom } from "../Redux/actions";
+import {markMessages} from "../utils/utils";
 
 
 
@@ -26,7 +27,7 @@ export const subscribeToRooms = () => {
 export const subscribeToRoomMessages = (ID) => {
     messagesSub = client.subscribe(`/topic/messages/${ID}`, (message) => {
         let response = JSON.parse(message.body);
-        store.dispatch(addMessages(response));
+        store.dispatch(addMessages(markMessages(response, store.getState().userReducer.userInfo.id)));
     })
 };
 

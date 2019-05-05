@@ -6,6 +6,7 @@ import * as storageService from "../../../services/storageService";
 import DisplayAvatar from "../../DisplayAvatar/DisplayAvatar";
 import {authenticate, setUserInfo} from "../../../Redux/actions";
 import { connect } from "react-redux";
+import * as wsService from "../../../services/websocketService";
 
 const ModalTrigger = ({onOpen, profileImage}) => <button className="circle profile-changer" onClick={onOpen}>
     <DisplayAvatar size={42} profileImage={profileImage}/>
@@ -82,6 +83,7 @@ class ProfileConfigurator extends Component {
     logout = () => {
         storageService.deleteFromStorage("Authorization");
         this.props.authenticate(false);
+        wsService.disconnectFromRooms();
     };
 
     render() {
