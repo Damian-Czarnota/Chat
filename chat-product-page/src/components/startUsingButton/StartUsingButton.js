@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import './StartUsingButton.scss';
 import SVGFill from '../SVGFill/SVGFill';
 import PropTypes from 'prop-types';
+import AnimationHandler from "../animationHandler/animationHandler";
 
 export default class StartUsingButton extends Component {
 
@@ -17,7 +18,7 @@ export default class StartUsingButton extends Component {
     render(){
         let { text, withoutDescription } = this.props;
         return(
-            <div className="enjoy">
+            <div className="enjoy wobble">
                 <a className="button button--big button--primary" href={process.env.REACT_APP_WEB_APP_URL}>{text}</a>
                 {!withoutDescription&&(
                     <SVGFill />)}

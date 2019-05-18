@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Counter from '../../utils/Counter/Counter';
-import './NumbersSection.scss';
 
 export default class NumbersSection extends Component {
     constructor(props){

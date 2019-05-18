@@ -1,5 +1,5 @@
 @import "../variables";
-
+@import "../../node_modules/animatewithsass/animate";
 body{
   font-family: "Roboto", sans-serif;
 }
@@ -183,6 +183,44 @@ p {
   }
 }
 
+.why_us--animation {
+  @include fadeInLeftBig(
+          $duration: 1s,
+          $delay: .2s,
+          $function: ease,
+          $fill: both
+  );
+}
+
+
+.fadeInRightBit {
+  @include fadeInRightBig(
+          $duration: 1s,
+          $delay: .2s,
+          $function: ease,
+          $fill: both
+  );
+}
+
+.rollIn {
+  @include rollIn(
+          $duration: 1s,
+          $delay: .2s,
+          $function: ease,
+          $fill: both
+  )
+}
+.wobble {
+  @include wobble(
+          $duration: 2s,
+          $function: ease,
+          $fill: both
+  )
+}
+
+.hidden {
+  visibility: hidden;
+}
 @media screen and (max-width: 990px){
   .wrapper {
     max-width:720px;

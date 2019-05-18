@@ -3,11 +3,20 @@
  */
 
 import React, { Component } from 'react';
+import AnimationHandler from "../animationHandler/animationHandler";
+
 
 export default class WhyUs extends Component {
+
+    constructor(props){
+        super(props);
+        this.myRef = React.createRef();
+    }
+
     render(){
         return(
-            <div className="section" id="why_us">
+            <div className="section hidden" id="why_us" ref={this.myRef}>
+                <AnimationHandler reference={this.myRef} animation={'why_us--animation'}/>
                 <div className="wrapper">
                     <div className="section__description">
                         <h2 className="section__title">Why us?</h2>

@@ -6,15 +6,23 @@
 import React, { Component } from 'react';
 import HexBackground from '../hex/HexBackground';
 import StartUsingButton from '../../components/startUsingButton/StartUsingButton';
+import AnimationHandler from "../animationHandler/animationHandler";
 
 export default class Register extends Component {
+
+    constructor(props){
+        super(props);
+        this.ref = React.createRef();
+    }
+
     render(){
         return(
                 <div className="section section--register">
+                    <AnimationHandler reference={this.ref} animation={'rollIn'}/>
                     <div className="wrapper">
                         <div className="section__boxes">
                             <div className="box box--2 box--fill">
-                                <div className="box__wrapper box__wrapper--left">
+                                <div className="box__wrapper box__wrapper--left hidden" ref={this.ref}>
                                     <h2 className="section__title">Title</h2>
                                     <p className="section__text">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel tempor libero. Nam convallis mollis massa.
