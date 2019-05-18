@@ -5,13 +5,15 @@
   width: 75vw;
   &__header {
     margin-left: 2px;
-    padding: 30px 0;
+    padding: 32px 0;
     text-align: center;
     border-bottom: 2px solid #fff;
+    background-color: white;
   }
   &__list {
     overflow-y: scroll;
-    height: 70vh;
+    height: 60vh;
+    background-color: white;
   }
 }
 
@@ -19,7 +21,7 @@
   border-radius: 10px;
   margin: 10px;
   padding: 10px 20px;
-  background-color: white;
+  background-color: $fourth-gray;
   &--background {
     background-color: #f8ff7d;
   }

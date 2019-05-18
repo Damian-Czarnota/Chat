@@ -69,7 +69,7 @@ class Messages extends Component {
                                     {message.content}
                                 </div>
                                 <div className="col col__align--center col__direction--col">
-                                    <DisplayAvatar size={64} profileImage={message.isMine?userInfo.profileImage:message.author.profileImage} />
+                                    <DisplayAvatar size={32} profileImage={message.isMine?userInfo.profileImage:message.author.profileImage} />
                                     <p className="message__author">{message.author.name}</p>
                                 </div>
                             </div>

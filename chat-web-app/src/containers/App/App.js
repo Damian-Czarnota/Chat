@@ -28,10 +28,7 @@ class App extends Component {
     this.setConnected = this.setConnected.bind(this);
 }
   componentDidMount(){
-    const spinner = document.querySelector('.loading');
-    if (spinner && !spinner.hasAttribute('hidden')) {
-      spinner.setAttribute('hidden', 'true');
-    }
+    this.spinner = document.querySelector('.loading');
   }
 
   componentWillMount() {
@@ -44,6 +41,9 @@ class App extends Component {
 
   setConnected = () => {
     this.setState({connected:true})
+    if (this.spinner && !this.spinner.hasAttribute('hidden')) {
+      this.spinner.setAttribute('hidden', 'true');
+    }
   };
 
   authenticate = () => {

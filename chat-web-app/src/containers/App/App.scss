@@ -62,15 +62,19 @@ body {
 
 .container {
   display: flex;
-}
-
-.advert {
-  position: absolute;
-  top: 50%;
-  left:30%;
-  padding: 20px;
-  color: $main-blue;
-  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg,$main-gold,$second-gold 50%,$main-gold);
+  height: 100vh;
+  &__application {
+    position: relative;
+    padding: 25px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 95vw;
+    max-height: 95vh;
+  }
 }
 
 .avatar {

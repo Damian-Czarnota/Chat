@@ -38,22 +38,21 @@ class MainScreenApp extends Component {
         let { userInfo, isInRoom } = this.props;
         return(
             <div className="container">
-                <ProfileConfigurator profileImage={userInfo.profileImage}/>
-                {isInRoom&&(
-                    <Fragment>
-                        <Users />
-                        <Messages messages={this.messages} />
-                    </Fragment>
-                )}
-                {!isInRoom&&(
-                    <Fragment>
-                        <Rooms />
-                        <div className="advert">
-                            <p>Select your room and start chatting now!</p>
-                        </div>
-                    </Fragment>
+                <div className="container__application" style={{paddingRight: isInRoom ?  '' : 70 + 'px'}}>
+                    <ProfileConfigurator profileImage={userInfo.profileImage}/>
+                    {isInRoom&&(
+                        <Fragment>
+                            <Users />
+                            <Messages messages={this.messages} />
+                        </Fragment>
+                    )}
+                    {!isInRoom&&(
+                        <Fragment>
+                            <Rooms />
+                        </Fragment>
 
-                )}
+                    )}
+                </div>
             </div>
         )
     }
