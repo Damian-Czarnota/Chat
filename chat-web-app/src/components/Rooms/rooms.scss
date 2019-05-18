@@ -84,8 +84,15 @@
       width: 45vh;
       text-overflow: ellipsis;
     }
+    &__list {
+      height: 72vh;
+    }
+    &__header {
+      border-radius: 0;
+    }
   }
   .toggle {
     display: block;
+    border-bottom-left-radius: 10px;
   }
 }
