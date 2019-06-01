@@ -33,6 +33,10 @@ body {
     font-size: 13px;
     color: $danger;
   }
+  &--success {
+    font-size: 13px;
+    color: greenyellow;
+  }
 }
 
 .button {

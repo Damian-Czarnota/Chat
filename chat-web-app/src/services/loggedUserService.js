@@ -36,3 +36,20 @@ export const change = (file) =>{
                 return res.json();
         });
 };
+
+export const put = (form) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/me`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': getToken(),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+    })
+        .then(res => {
+            if (res.status >= 400) {
+                throw new customError(res.type, res.ok, res.status);
+            }
+        })
+        .then(res => res);
+};

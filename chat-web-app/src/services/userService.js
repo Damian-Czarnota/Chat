@@ -12,7 +12,7 @@ export const register = (form) =>
     })
         .then(res => {
             if (res.status >= 400) {
-                throw res.json();
+                return new customError(res.type, res.ok, res.status);
             }
         })
         .then(res => res);
@@ -27,7 +27,7 @@ export const login = (form) =>
     })
         .then(res => {
             if (res.status >= 400){
-                throw res.json();
+                return new customError(res.type, res.ok, res.status);
             }
             else
                 return res.json()
